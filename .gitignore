@@ -1,0 +1,9 @@
+.env
+src/__pycache__/
+*.pyc
+.idea
+.DS_Store
+__pycache__
+/node_modules/
+/client/
+/backend/

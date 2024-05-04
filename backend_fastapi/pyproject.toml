@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "uniquethings-market-back"
+version = "0.1.0"
+description = ""
+authors = ["Mark Chalenko <markus.chalenko@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.110.3"
+alembic = "^1.13.1"
+pydantic = {extras = ["email"], version = "^2.7.1"}
+pytest = "^8.2.0"
+sqlalchemy = "^2.0.29"
+pydantic-settings = "^2.2.1"
+orjson = "^3.10.1"
+bcrypt = "^4.1.2"
+python-jose = {extras = ["cryptogrphy"], version = "^3.3.0"}
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+python-multipart = "^0.0.9"
+uvicorn = "^0.29.0"
+uuid = "^1.30"
+oauth = "^1.0.1"
+asyncpg = "^0.29.0"
+greenlet = "^3.0.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
