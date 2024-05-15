@@ -1,7 +1,9 @@
 from datetime import datetime
+from typing import Optional
 
 from fastapi import HTTPException
 from sqlalchemy import select, update, delete
+from sqlalchemy.orm import joinedload
 from starlette import status
 
 from auth.auth import bcrypt_context
@@ -28,9 +30,10 @@ async def create_new_user(db: db_dependency, user_data: UserCreate) -> UserRead:
 
 
 async def get_user_by_id(db: db_dependency, user_id: int) -> UserRead:
-    statement = select(User).where(User.id == user_id)
-    result = await db.execute(statement)
-    user: User = result.scalar()
+    result = await db.execute(select(User)
+                              .options(joinedload(User.role))
+                              .where(User.id == user_id))
+    user: Optional[User] = result.scalars().first()
 
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,

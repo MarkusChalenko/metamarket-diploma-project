@@ -7,4 +7,4 @@ JWT_SECRET = app_settings.jwt_secret
 ALGORITHM = app_settings.algorithm
 
 bcrypt_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
-oauth2_bearer = OAuth2PasswordBearer(tokenUrl='v1/auth/token')
+oauth2_bearer = OAuth2PasswordBearer(tokenUrl='/auth/token')

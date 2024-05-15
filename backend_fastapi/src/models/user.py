@@ -4,9 +4,9 @@ from typing import List
 from sqlalchemy import Integer, String, TIMESTAMP, ForeignKey
 from sqlalchemy.orm import relationship, Mapped, mapped_column
 
+from schemas.role import Role
 from schemas.user import UserRead
 from .base import Base
-from .role import Role
 
 
 class User(Base):
@@ -17,7 +17,7 @@ class User(Base):
     email: Mapped[str] = mapped_column(String(length=256), unique=True, index=True, nullable=False)
     hashed_password: Mapped[str] = mapped_column(String(length=256), nullable=False)
     role_id: Mapped[int] = mapped_column(ForeignKey("role.id"), default=1)
-    role: Mapped[Role] = relationship(lazy=True)
+    role: Mapped["Role"] = relationship("Role", uselist=False)
     registered_at = mapped_column(TIMESTAMP, default=datetime.utcnow)
 
     products: Mapped[List["Product"]] = relationship("Product", back_populates="user")
@@ -32,5 +32,9 @@ class User(Base):
             full_name=self.full_name,
             email=self.email,
             role_id=self.role_id,
+            role=Role(
+                id=self.role.id,
+                name=self.role.name
+            ),
             registered_at=self.registered_at,
         )

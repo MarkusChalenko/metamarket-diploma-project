@@ -6,8 +6,8 @@ from fastapi import FastAPI
 from fastapi.responses import ORJSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 
-from api.v1.auth import auth_router
-from api.v1.user import user_router
+from api import api_router
+
 from services.auth import user_dependency
 from core.config import app_settings
 
@@ -43,8 +43,7 @@ app.add_middleware(
 )
 
 
-app.include_router(auth_router)
-app.include_router(user_router)
+app.include_router(api_router)
 
 
 @app.get("/ping")
