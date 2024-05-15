@@ -7,13 +7,10 @@ from services.user import create_new_user, get_user_by_id, update_user, delete_u
 
 from services.auth import user_dependency
 
-user_router = APIRouter(
-    prefix="/user",
-    tags=['user']
-)
+user_router = APIRouter(prefix="/user", tags=['user'])
 
 
-@user_router.get("/{user_id}")
+@user_router.get("/{user_id}", response_model=UserRead)
 async def get_user(db: db_dependency, user_id: int):
     user: UserRead = await get_user_by_id(db=db, user_id=user_id)
     return user

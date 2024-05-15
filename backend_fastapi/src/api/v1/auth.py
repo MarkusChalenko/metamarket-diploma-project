@@ -10,10 +10,7 @@ from schemas.user import UserRead, UserLogin, UserLoginResponse, UserRegistratio
 from services.auth import authenticate_user, create_access_token, user_dependency, create_refresh_token, \
     save_refresh_token, login_user, refresh_token_dependency, reg_user
 
-auth_router = APIRouter(
-    prefix="/auth",
-    tags=['auth']
-)
+auth_router = APIRouter(prefix="/auth", tags=['auth'])
 
 
 @auth_router.post("/reg")

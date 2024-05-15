@@ -1,7 +1,8 @@
-from datetime import datetime
 from typing import Optional
 
 from pydantic import EmailStr, BaseModel
+
+from schemas.role import Role
 
 
 class UserBase(BaseModel):
@@ -20,6 +21,7 @@ class UserRead(BaseModel):
     full_name: str
     email: EmailStr
     role_id: Optional[int]
+    role: Optional[Role]
 
 
 class UserUpdate(BaseModel):
