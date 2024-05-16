@@ -1,0 +1,40 @@
+.container {
+  height: calc(100vh - 80px);
+  @apply relative animate-fade flex items-center justify-center;
+}
+
+.fields {
+  @apply grid grid-cols-1 2xl:grid-cols-3 items-start justify-center my-8 mx-16;
+
+  > div:first-child {
+    @apply xl:grid xl:grid-cols-2 2xl:grid 2xl:grid-rows-2 2xl:grid-cols-1 2xl:col-span-1; 
+  }
+
+  > div:last-child {
+    @apply 2xl:col-span-2;
+  }       
+}
+
+@media screen and (max-width: 1280px) {
+  .fields {
+    > div:first-child { 
+      @apply grid grid-cols-2;
+    }
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .fields {
+    > div:first-child { 
+      @apply grid grid-cols-1 grid-rows-2;
+    }
+  }
+}
+
+.image {
+  @apply relative text-left animate-fade;
+}
+
+.message {
+  @apply absolute -bottom-6 text-sm w-full text-red-600;
+}

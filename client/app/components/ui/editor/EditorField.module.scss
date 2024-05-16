@@ -1,0 +1,42 @@
+.editorField {
+  @apply border-0 relative text-left mt-8 animate-fade;
+
+  > label {
+    @apply block;
+
+    > span {
+      @apply font-light text-xl block mb-2;
+    }
+
+    .wrapper {
+      .toolbar {
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgb(40 40 40 / 8%);
+        @apply outline-border-none p-4 mb-4;
+
+        > div {
+          @apply m-0;
+
+          > div {
+            @apply outline-border-none shadow-none transition-colors bg-white hover:bg-gray-300 mx-1.5 py-6 px-4;
+          }
+        }
+      }
+      .editor {
+        @apply outline-none block px-2 w-full border rounded h-40 py-0 m-0 border-gray-700  bg-transparent text-xl focus:ring-0 focus-within:border-primary transition-colors overflow-auto;
+      }
+    }
+  }
+}
+
+.editor::-webkit-scrollbar {
+  @apply w-1;
+}
+
+.editor::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded-full;
+}
+
+.message {
+  @apply absolute -bottom-6 text-sm w-full text-red-600;
+}

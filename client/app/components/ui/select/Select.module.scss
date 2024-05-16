@@ -1,0 +1,97 @@
+.select [class$="-control"] {
+  height: 80px !important;
+  cursor: pointer !important;
+  border: none !important;
+  border-radius: 4px !important;
+  background: #fff !important;
+  box-shadow: 0 2px 4px rgb(40 40 40 / 8%) !important;
+  font-size: 20px !important;
+}
+
+.select [class$="placeholder"] {
+  color: var(--font-black) !important;
+}
+
+.select [class$="ValueContainer"] {
+  padding-left: 24px !important;
+}
+
+.select [class$="menu"] {
+  color: var(--font-black) !important;
+  background-color: #fff !important;
+  font-size: 20px !important;
+  margin-top: 8px !important;
+
+  animation: scaleIn 0.2s ease-in-out;
+}
+
+.select [class$="option"] {
+  cursor: pointer !important;
+  height: 80px !important;
+  padding: 24px !important;
+}
+
+.select [class$="option"]:hover {
+  cursor: pointer !important;
+  color: #fff !important;
+  background-color: #0065f2 !important;
+}
+
+.select [class$="multi-value"] {
+  margin-right: 24px !important;
+  border-radius: 4px !important;
+  background-color: white !important;
+  box-shadow: 0 0 4px rgb(40 40 40 / 8%) !important;
+}
+
+.select [class$="multi-value__label"] {
+  color: var(--font-black) !important;
+  font-size: 100% !important;
+}
+
+.select [class$="multi-value__remove"] {
+  color: var(--font-black) !important;
+}
+
+.select [class$="multi-value__remove"]:hover {
+  color: var(--font-black) !important;
+  background-color: transparent !important;
+}
+
+.select [class$="indicatorSeparator"] {
+  display: none !important;
+}
+
+.select [class$="indicatorContainer"] {
+  padding-right: 24px !important;
+}
+
+@keyframes scaleIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.wrapper {
+  @apply relative mt-8 animate-fade;
+
+  > label {
+    @apply block;
+
+    > span {
+      @apply font-light text-xl block mb-2;
+    }
+  }
+}
+
+.message {
+  @apply absolute -bottom-6 text-sm w-full text-red-600;
+}

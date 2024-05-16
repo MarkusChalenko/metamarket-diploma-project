@@ -1,0 +1,18 @@
+.small {
+  @apply py-4 px-6 text-xl font-medium;
+}
+
+.large {
+  @apply py-5 px-8 text-3xl font-medium;
+}
+
+.arrow {
+  @apply inline-block ml-4;
+
+  > svg {
+    width: 30px;
+    height: 30px;
+
+    @apply inline-flex items-center;
+  }
+}

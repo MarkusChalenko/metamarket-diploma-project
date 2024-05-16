@@ -1,0 +1,17 @@
+.image {
+  @apply relative text-left animate-fade;
+}
+
+.upload {
+  input[type="file"] {
+    display: none;
+  }
+  
+  label {
+    @apply inline-flex items-center box-border bg-transparent text-primary border-2 border-primary rounded-2xl cursor-pointer py-4 px-6 text-xl font-medium transition-colors hover:bg-primary hover:text-white my-8;
+  }
+}
+
+.message {
+  @apply absolute -bottom-6 text-sm w-full text-red-600;
+}

@@ -15,7 +15,10 @@ auth_router = APIRouter(prefix="/auth", tags=['auth'])
 
 @auth_router.post("/reg")
 async def reg(body: UserRegistration, db: db_dependency):
-    return await reg_user(body=body,db=db)
+    try:
+        return await reg_user(body=body,db=db)
+    except Exception as ex:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=f"Аn error has occurred: {ex}")
 
 
 @auth_router.post("/login", response_model=UserLoginResponse)
@@ -41,7 +44,7 @@ async def token(form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
             'type': 'bearer'}
 
 
-@auth_router.post('/refresh_token')
+@auth_router.post('/refresh')
 async def refresh(token_response: refresh_token_dependency):
     if isinstance(token_response, Exception):
         raise token_response
