@@ -42,3 +42,8 @@ async def delete_existing_user(user: user_dependency,
                                delete_user_id: int):
     await delete_user(db=db, user_id=delete_user_id)
     return {"message": f"User with id:{delete_user_id} deleted successfully."}
+
+
+@user_router.get("/profile/", status_code=status.HTTP_200_OK, response_model=UserRead)
+async def get_current_user(user: user_dependency):
+    return user

@@ -1,0 +1,19 @@
+.field {
+  @apply relative text-left mt-8 animate-fade;
+
+  > label {
+    @apply block;
+
+    > span {
+      @apply font-light text-xl block mb-2;
+    }
+
+    input {
+      @apply outline-none m-0 px-4 border rounded border-gray-700  bg-transparent w-full text-xl focus:ring-0 py-4 focus-within:border-primary transition-colors;
+    }
+  }
+}
+
+.message {
+  @apply absolute -bottom-6 text-sm w-full text-red-600;
+}

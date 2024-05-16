@@ -1,0 +1,19 @@
+.container {
+  @apply flex items-center;
+
+  > div {
+    @apply relative mr-8 last:mr-0 hover:text-gray-700;
+  }
+}
+
+.title {
+  @apply flex items-center text-black text-xl animate-fade cursor-pointer h-20 border-b-4 border-b-transparent transition-colors hover:border-b-primary;
+}
+
+.dropdown {
+  @apply absolute bg-white rounded-b-2xl shadow-sm pb-4 w-72 right-0 z-1;
+}
+
+.icon {
+  @apply flex items-center text-black text-xl animate-fade cursor-pointer h-20 border-b-4 border-b-transparent transition-colors hover:border-b-primary;
+}

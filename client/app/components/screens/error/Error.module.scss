@@ -1,0 +1,4 @@
+.container {
+  height: calc(100vh - 80px);
+  @apply h1 flex items-center justify-center animate-pulse;
+}

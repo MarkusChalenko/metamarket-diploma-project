@@ -1,6 +1,7 @@
 from datetime import datetime
 from typing import Optional
 
+from asyncpg import UniqueViolationError
 from fastapi import HTTPException
 from sqlalchemy import select, update, delete
 from sqlalchemy.orm import joinedload
@@ -25,6 +26,8 @@ async def create_new_user(db: db_dependency, user_data: UserCreate) -> UserRead:
 
         created_user_data: UserRead = await get_user_by_email(db, user_data.email)
         return created_user_data
+    except UniqueViolationError:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='User with such credentials already exist')
     except Exception as ex:
         raise ex
 
@@ -66,12 +69,15 @@ async def delete_user(db: db_dependency, user_id: int) -> None:
     await db.commit()
 
 
-async def get_user_by_email(db: db_dependency, email: str) -> UserRead:
-    statement = select(User).where(User.email == email)
-    result = await db.execute(statement)
-    user: User = result.scalar()
+async def get_user_by_email(db: db_dependency, email: str, with_pass: bool = False) -> UserRead | User:
+    result = await db.execute(select(User)
+                              .options(joinedload(User.role))
+                              .where(User.email == email))
+    user: Optional[User] = result.scalars().first()
 
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f"No user with email:{email}")
+    if with_pass:
+        return user
     return user.to_user_read()

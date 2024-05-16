@@ -15,9 +15,10 @@ from auth.auth import bcrypt_context, oauth2_bearer
 from core.config import app_settings
 from db.db import db_dependency
 from models import User, RefreshToken
+from schemas.role import Role
 from schemas.token import Tokens
 from schemas.user import UserRead, UserLogin, UserLoginResponse, UserRegistration
-from services.user import create_new_user
+from services.user import create_new_user, get_user_by_email
 
 error = HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
                       detail="Could not validate user.")
@@ -25,9 +26,7 @@ error = HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
 
 async def authenticate_user(email: str, password: str, db: db_dependency) -> UserRead | None:
     try:
-        statement = select(User).where(User.email == email)
-        result = await db.execute(statement)
-        user: Optional[User] = result.scalars().first()
+        user: User = await get_user_by_email(db, email, with_pass=True)
         if not user:
             return None
         if not bcrypt_context.verify(password, user.hashed_password):
@@ -67,7 +66,7 @@ async def save_refresh_token(db: AsyncSession, refresh_token: str, user_id: int)
     await db.commit()
 
 
-async def get_current_user(token: Annotated[str, Depends(oauth2_bearer)]):
+async def get_current_user(token: Annotated[str, Depends(oauth2_bearer)]) -> UserRead:
     try:
         payload: dict = jwt.decode(token, app_settings.jwt_secret,
                                    algorithms=app_settings.algorithm)
@@ -75,7 +74,16 @@ async def get_current_user(token: Annotated[str, Depends(oauth2_bearer)]):
         user_id: int = payload.get('id')
         if user_name is None or user_id is None:
             raise error
-        return {'username': user_name, 'id': user_id}
+        return UserRead(
+            id=payload.get('id'),
+            full_name=payload.get('full_name'),
+            email=payload.get('email'),
+            role_id=payload.get('role_id'),
+            role=Role(
+                id=payload.get('role').get('id'),
+                name=payload.get('role').get('name')
+            )
+        )
     except JWTError:
         raise error
 
@@ -128,9 +136,7 @@ async def reg_user(body: UserRegistration, db: AsyncSession) -> UserRead:
 
 
 async def login_user(body: UserLogin, db: AsyncSession) -> UserLoginResponse:
-    statement = select(User).where(User.email == body.email)
-    result = await db.execute(statement)
-    user: Optional[User] = result.scalars().first()
+    user: User = await get_user_by_email(db,body.email, with_pass=True)
 
     if not user:
         raise error
@@ -151,11 +157,15 @@ async def login_user(body: UserLogin, db: AsyncSession) -> UserLoginResponse:
         full_name=user.full_name,
         email=user.email,
         role_id=user.role_id,
+        role=Role(
+            id=user.role.id,
+            name=user.role.name
+        ),
         access_token=access_tkn,
         refresh_token=refresh_tkn,
         type='bearer'
     )
 
 
-user_dependency = Annotated[dict, Depends(get_current_user)]
+user_dependency = Annotated[UserRead, Depends(get_current_user)]
 refresh_token_dependency = Annotated[str, Depends(authorize)]

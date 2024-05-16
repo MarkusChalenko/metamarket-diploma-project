@@ -1,0 +1,94 @@
+.card {
+  @apply grid grid-cols-1 2xl:grid-cols-3 items-start justify-center my-8 mx-16 grid-rows-1;
+
+  > div:first-child {
+    @apply xl:grid xl:grid-cols-2 2xl:grid 2xl:grid-rows-2 2xl:grid-cols-1 2xl:col-span-1;
+  }
+
+  > div:last-child {
+    @apply 2xl:col-span-2;
+  }
+  
+}
+
+@media screen and (max-width: 1280px) {
+  .information {
+    > div:first-child {
+      @apply grid grid-cols-2;
+    }
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .information {
+    > div:first-child {
+      @apply grid grid-cols-1 grid-rows-2;
+    }
+  }
+}
+
+
+
+.information {
+  .description {
+    @apply mb-8;
+    > label {
+      @apply block;
+
+      > p {
+        @apply text-3xl block mb-4;
+      }
+    }
+  }
+  .details {
+    @apply mb-8;
+    > p {
+      @apply text-3xl block mb-4;
+    }
+    > label {
+      @apply flex-center-between;
+
+      > p {
+        @apply text-2xl block mb-2 text-slate-700;
+      }
+
+      > span {
+        @apply font-normal text-xl block text-slate-500;
+      }
+    }
+  }
+
+  .records {
+    > p {
+      @apply text-3xl block mb-4;
+    }
+
+    > table {
+      box-shadow: 0 2px 4px rgb(40 40 40 / 8%); 
+      @apply w-full;
+      > tbody {
+        > tr:first-child {
+          @apply border border-collapse h-12 bg-white;
+          > th {
+            @apply p-6 text-left text-xl font-normal;
+          }
+        }
+  
+        > tr {
+          @apply border border-collapse h-12 bg-white;
+          > th {
+            @apply p-6 text-left text-xl font-normal text-slate-500;
+          }
+        }
+      }
+    }
+  }
+}
+
+.sign {
+  @apply w-96 mt-8;
+
+  span {
+    @apply ml-4 text-2xl;
+  }
+}

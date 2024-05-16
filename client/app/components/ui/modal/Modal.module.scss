@@ -1,0 +1,7 @@
+.modal {
+  @apply fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center;
+}
+
+.content {
+  @apply bg-white py-12 px-44 rounded-lg block items-center justify-center text-center;
+}
