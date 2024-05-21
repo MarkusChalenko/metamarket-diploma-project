@@ -5,10 +5,16 @@ __all__ = [
     "RefreshToken",
     "Product",
     "ProductCategory",
-    "ProductReview"
+    "ProductReview",
+    "CartItem",
+    "Order",
+    "OrderProductAssociation"
 ]
 
 from .base import Base
+from .cart_item import CartItem
+from .order import Order
+from .order_product_association import OrderProductAssociation
 from .role import Role
 from .user import User
 from .refresh_token import RefreshToken

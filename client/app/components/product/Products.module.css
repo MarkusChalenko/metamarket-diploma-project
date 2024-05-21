@@ -1,0 +1,7 @@
+.productContainer {
+    display: flex;
+    flexWrap: wrap;
+    min-width: 80%;
+    margin-bottom: 50px;
+    box-sizing: border-box;
+}

@@ -4,6 +4,7 @@ from pydantic import EmailStr, BaseModel
 
 from schemas.role import Role
 
+from datetime import datetime
 
 class UserBase(BaseModel):
     full_name: str

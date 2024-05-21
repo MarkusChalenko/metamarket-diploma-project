@@ -44,6 +44,7 @@ def create_sessionmaker(
     )
 
 
-engine = create_async_engine(app_settings.postgres_dsn.unicode_string())
+engine = create_async_engine(app_settings.postgres_dsn.unicode_string(),
+                             echo=False)
 async_session = create_sessionmaker(engine)
 db_dependency = Annotated[AsyncSession, Depends(get_async_session)]

@@ -38,7 +38,7 @@ async def product_delete(product_id: int, db: db_dependency):
 
 @product_router.get("/{user_id}/products", response_model=UserProducts)
 async def get_all_user_products(user_id: int, db: db_dependency):
-    user_products = await get_user_products(user_id)
+    user_products = await get_user_products(user_id, db)
     if user_products is None:
         raise HTTPException(status_code=404, detail="User not found")
     return user_products

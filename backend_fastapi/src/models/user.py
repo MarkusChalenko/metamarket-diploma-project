@@ -22,8 +22,9 @@ class User(Base):
 
     products: Mapped[List["Product"]] = relationship("Product", back_populates="user")
     reviews: Mapped["ProductReview"] = relationship("ProductReview", back_populates="reviewer")
+    cart: Mapped["CartItem"] = relationship("CartItem", back_populates="user")
+    orders: Mapped["Order"] = relationship("Order", back_populates="user")
 
-    # refresh_token: Mapped["RefreshToken"] = relationship("RefreshToken", backref="user")
     refresh_token = relationship("RefreshToken", uselist=False, back_populates="user")
 
     def to_user_read(self) -> UserRead:
@@ -35,6 +36,5 @@ class User(Base):
             role=Role(
                 id=self.role.id,
                 name=self.role.name
-            ),
-            registered_at=self.registered_at,
+            )
         )

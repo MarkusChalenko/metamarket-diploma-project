@@ -1,49 +1,34 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { toastr } from "react-redux-toastr";
 
 import { Button } from "@/components/ui/button/Button";
 
+import Catalog from "@/components/catalog/Catalog"
+import { SearchBar } from "@/components/searchBar/SearchBar"
+import { MiniProductCard } from "@/components/product/MiniProductCard"
+
 import { Meta } from "@/utils/meta/Meta";
+
+import { MainBanner } from "./banner/MainBanner"
 
 import mainImage from "@/assets/images/main.jpg";
 
 import styles from "./Home.module.scss";
+import {Product} from "@/components/product/Products";
 
 export const Home: FC = (): JSX.Element => {
   const { push } = useRouter();
 
   return (
-    <Meta
-      title="Home page"
-      description="Discover, collect, and sell extraordinary NFTs"
-    >
+    <Meta title="Home page" description="Discover, collect, and sell extraordinary NFTs">
+      <Catalog />
       <div className={styles.container}>
-        <div>
-          <h1 className="h1">Discover, collect, and sell extraordinary NFTs</h1>
-          <p className="font-light text-xl mt-4">
-            Buy, Sell, and discover exclusive digital assets.
-          </p>
-          <Button
-            title="Creare Item"
-            appearance="large"
-            className="btn-primary mt-8"
-            arrow
-            onClick={() => push("/create/category")}
-          />
-        </div>
-        <div>
-          <Image
-            src={mainImage}
-            width={700}
-            height={700}
-            alt="Main image"
-            draggable={false}
-            className="rounded-2xl"
-          />
-        </div>
+        <MainBanner/>
+        <Product />
       </div>
     </Meta>
   );
 };
+

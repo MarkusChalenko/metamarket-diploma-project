@@ -1,4 +1,5 @@
 from _pydecimal import Decimal
+from typing import Dict
 
 from sqlalchemy import Integer, String, Text, Numeric, DateTime, ForeignKey
 from sqlalchemy.orm import relationship, Mapped, mapped_column
@@ -6,6 +7,7 @@ from datetime import datetime
 from enum import Enum
 
 from .base import Base
+from .order_product_association import OrderProductAssociation
 
 
 class ProductStatus(str, Enum):
@@ -29,11 +31,30 @@ class Product(Base):
     image_url: Mapped[str] = mapped_column(String, nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
     updated_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-
     category_id: Mapped[int] = mapped_column(Integer, ForeignKey("product_category.id"))
-    category: Mapped["ProductCategory"] = relationship("ProductCategory", back_populates="products")
 
+    category: Mapped["ProductCategory"] = relationship("ProductCategory", back_populates="products")
     reviews: Mapped["ProductReview"] = relationship("ProductReview", back_populates="product")
+    cart_items: Mapped["CartItem"] = relationship("CartItem", back_populates="product")
+
+    orders_details: Mapped[list["OrderProductAssociation"]] = relationship(
+        back_populates="product",
+    )
+
+    def to_dict(self) -> Dict:
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "title": self.title,
+            "description": self.description,
+            "price": float(self.price),
+            "currency": self.currency,
+            "status": self.status.value,
+            "image_url": self.image_url,
+            "created_at": self.created_at.isoformat(),
+            "updated_at": self.updated_at.isoformat(),
+            "category_id": self.category_id,
+        }
 
     def __repr__(self) -> str:
-        return f"<Product(name='{self.name}', price={self.price}, status='{self.status}')>"
+        return f"<Product(name='{self.title}', price={self.price}, status='{self.status}')>"

@@ -49,7 +49,7 @@ async def update_user(db: db_dependency, user_id: int, update_data: UserUpdate) 
         .where(User.id == user_id)\
         .values(update_data.dict(exclude_unset=True))
     updated_count = await db.execute(statement)
-    rows = updated_count.rowcount()
+    rows = updated_count.rowcount
     if rows == 0:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User with id {user_id} not found")
 
