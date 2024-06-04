@@ -19,13 +19,13 @@ export const AuthProvider: FC<IAuthProvider> = ({
 
   const { pathname } = useRouter();
 
-  useEffect(() => {
-    const access_token = Cookies.get("access_token");
-
-    if (access_token) {
-      checkAuth();
-    }
-  }, []);
+  // useEffect(() => {
+  //   const access_token = Cookies.get("access_token");
+  //
+  //   if (access_token) {
+  //     checkAuth();
+  //   }
+  // }, []);
 
   useEffect(() => {
     const refresh_token = Cookies.get("refresh_token");

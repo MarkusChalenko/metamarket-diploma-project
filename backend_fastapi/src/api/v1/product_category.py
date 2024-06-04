@@ -1,9 +1,16 @@
+from typing import List
+
 from fastapi import APIRouter, HTTPException
 from db.db import db_dependency
-from services.product_category import create_category, get_category, delete_category
+from services.product_category import create_category, get_category, delete_category, get_all_categories
 from schemas.product_category import ProductCategoryCreate, ProductCategory
 
 product_category_router = APIRouter(prefix="/categories", tags=["categories"])
+
+
+@product_category_router.get("/", response_model=List[ProductCategory])
+async def get_all(db: db_dependency):
+    return await get_all_categories(db)
 
 
 @product_category_router.post("/", response_model=ProductCategory)

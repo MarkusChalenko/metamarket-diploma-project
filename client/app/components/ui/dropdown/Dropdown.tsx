@@ -12,24 +12,13 @@ export const Dropdown: FC<IDropdown> = ({
   appearance,
 }): JSX.Element => {
   const { asPath } = useRouter();
-
   const data = {
     extended: (
       <li className={styles.item}>
-        <Link href={link}>
-          <a>
-            <MaterialIcon name={icon} />
-            <span>{title}</span>
-          </a>
-        </Link>
+        <Link href={link}><a><MaterialIcon name={icon} /><span>{title}</span></a></Link>
       </li>
     ),
-    simple: (
-      <li className={styles.item}>
-        <span>{title}</span>
-      </li>
-    ),
+    simple: (<li className={styles.item}><span>{title}</span></li>),
   };
-
   return data[appearance];
 };

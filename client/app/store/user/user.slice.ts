@@ -43,10 +43,10 @@ export const userSlice = createSlice({
       .addCase(logout.fulfilled, (state) => {
         state.isLoading = false;
         state.user = null;
-      })
-      .addCase(checkAuth.fulfilled, (state, { payload }) => {
-        state.user = payload;
       });
+      // .addCase(checkAuth.fulfilled, (state, { payload }) => {
+      //   state.user = payload;
+      // });
   },
 });
 

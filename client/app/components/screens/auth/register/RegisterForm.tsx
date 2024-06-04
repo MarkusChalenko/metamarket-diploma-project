@@ -26,25 +26,15 @@ export const RegisterForm: FC<IForm> = ({
           <h1 className="h1">Register</h1>
           <p className="font-light text-xl mt-4">
             Already a member?{" "}
-            <Link href="/auth/login">
-              <a className="text-primary">Log In</a>
-            </Link>
+            <Link href="/auth/login"><a className="text-primary">Log In</a></Link>
           </p>
-          <RegisterFields
-            register={register}
-            formState={formState}
-            isPasswordRequired
+          <RegisterFields register={register} formState={formState} isPasswordRequired
           />
-          <Button
-            title="Create an account"
-            appearance="large"
-            className="btn-primary mt-8"
-            type="submit"
-            onClick={() => {
+          <Button title="Create an account" appearance="large" className="btn-primary mt-8"
+            type="submit" onClick={() => {
               formState.isValid && push("/auth/login");
               authFunction;
-            }}
-            disabled={isLoading}
+            }} disabled={isLoading}
           />
         </form>
       </section>

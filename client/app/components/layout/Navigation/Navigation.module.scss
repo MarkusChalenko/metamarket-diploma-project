@@ -1,3 +1,10 @@
 .nav {
-  @apply h-20 flex-center-between bg-white shadow-sm p-0 m-0 px-10 border-b border-b-gray-300;
+  background-color: white;
+  @apply h-20 flex-center-between shadow-sm p-0 m-0 px-10 border-b border-b-gray-300;
+}
+
+.nav p {
+  color: black;
+  font-size: x-large;
+  font-weight: normal;
 }

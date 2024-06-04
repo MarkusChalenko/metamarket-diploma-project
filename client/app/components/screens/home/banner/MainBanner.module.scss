@@ -1,0 +1,14 @@
+.banner {
+  width: 80%;
+  height: 100%;
+  background: #007bff;
+  border-radius: 25px;
+  display: flex; /* Используем flexbox для центрирования */
+  justify-content: center; /* Центрирование по горизонтали */
+  align-items: center; /* Центрирование по вертикали */
+  text-align: center; /* Центрирование текста по горизонтали */
+  color: white;
+  min-height: 500px;
+  min-width: 900px;
+  box-shadow: 5px 5px 5px gray;
+}

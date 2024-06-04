@@ -1,0 +1,42 @@
+.container {
+  position: absolute;
+  margin-top: 20px;
+  margin-left: 20px;
+  width: 200px; /* Ширина блока с категориями */
+  padding: 20px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px; /* Отступ снизу заголовка */
+}
+
+.categoryList {
+  display: flex;
+  flex-direction: column;
+}
+
+.category {
+  padding: 8px 16px; /* Отступы вокруг категории */
+  margin-bottom: 5px; /* Отступ между категориями */
+  border-radius: 4px; /* Закругленные углы */
+  cursor: pointer; /* Курсор при наведении */
+  color: #070707;
+  line-height: 18px;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: .2px;
+}
+
+.category:hover {
+  color: #005bff; /* Изменение цвета при наведении */
+}
+
+.active-category {
+  background-color: rgba(0,150,255,.12);
+  padding: 8px 16px; /* Отступы вокруг категории */
+  margin-bottom: 5px; /* Отступ между категориями */
+  border-radius: 4px; /* Закругленные углы */
+  cursor: pointer; /* Курсор при наведении */
+}

@@ -1,3 +1,5 @@
+from typing import List
+
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -8,6 +10,12 @@ from schemas.product_category import ProductCategoryCreate
 async def get_category(category_id: int, db: AsyncSession) -> ProductCategory:
     result = await db.execute(select(ProductCategory).filter(ProductCategory.id == category_id))
     return result.scalars().first()
+
+
+async def get_all_categories(db: AsyncSession) -> List[ProductCategory]:
+    result = await db.execute(select(ProductCategory))
+    categories: List[ProductCategory] = result.scalars().all()
+    return categories
 
 
 async def create_category(category: ProductCategoryCreate, db: AsyncSession) -> ProductCategory:

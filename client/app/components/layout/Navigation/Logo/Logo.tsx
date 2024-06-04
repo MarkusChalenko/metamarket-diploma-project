@@ -12,7 +12,7 @@ export const Logo: FC = (): JSX.Element => {
           src={logoImage}
           width={340}
           height={49}
-          alt="Unique Things"
+          alt="MetaMarket"
           draggable={false}
         />
       </a>

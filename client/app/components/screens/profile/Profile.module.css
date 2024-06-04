@@ -1,0 +1,18 @@
+.container {
+  min-height: calc(100vh - 80px);
+  height: 100%;
+  /*@apply flex items-center justify-center text-center;*/
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.profileInfo {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.profileInfo p {
+  margin: 10px 0;
+}

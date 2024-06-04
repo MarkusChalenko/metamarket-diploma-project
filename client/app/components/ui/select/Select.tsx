@@ -35,11 +35,9 @@ const Select: FC<ISelect> = ({
       return isMulti ? [] : "";
     }
   };
-
-  return (
-    <div className={cn(styles.wrapper)}>
-      <label>
-        <span>{placeholder}</span>
+const Select: FC<ISelect> = (): JSX.Element => {
+  return (<div className={cn(styles.wrapper)}>
+      <label><span>{placeholder}</span>
         <ReactSelect
           classNamePrefix="custom-select"
           className={styles.select}
@@ -47,12 +45,9 @@ const Select: FC<ISelect> = ({
           value={getValue()}
           isMulti={isMulti}
           onChange={onChange()}
-          components={animatedComponents}
-        />
+          components={animatedComponents}/>
       </label>
       {error && <div className={styles.message}>{error.message}</div>}
-    </div>
-  );
-};
+    </div>);};
 
 export default Select;

@@ -1,8 +1,9 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from starlette import status
 
 from db.db import db_dependency
 from schemas.user import UserCreate, UserRead, UserUpdate
+from services.role import has_role, Roles
 from services.user import create_new_user, get_user_by_id, update_user, delete_user
 
 from services.auth import user_dependency
@@ -26,22 +27,21 @@ async def create_user(db: db_dependency,
     return created_user
 
 
-@user_router.put("/{user_id}", status_code=status.HTTP_200_OK, response_model=UserRead)
-async def update_existing_user(user: user_dependency,
-                               db: db_dependency,
-                               user_id: int,
+@user_router.put("/", status_code=status.HTTP_200_OK, response_model=UserRead)
+async def update_existing_user(db: db_dependency,
+                               user: user_dependency,
                                update_user_data: UserUpdate) -> UserRead:
     updated_user_data: UserRead = \
-        await update_user(db=db, user_id=user_id, update_data=update_user_data)
+        await update_user(db=db, user_id=user.id, update_data=update_user_data)
     return updated_user_data
 
 
-@user_router.delete("/{user_id}", status_code=status.HTTP_200_OK)
+# check_role: None = Depends(has_role(Roles.customer))
+@user_router.delete("/", status_code=status.HTTP_200_OK)
 async def delete_existing_user(user: user_dependency,
-                               db: db_dependency,
-                               delete_user_id: int):
-    await delete_user(db=db, user_id=delete_user_id)
-    return {"message": f"User with id:{delete_user_id} deleted successfully."}
+                               db: db_dependency):
+    await delete_user(db=db, user_id=user.id)
+    return {"message": f"User with id:{user.id} deleted successfully."}
 
 
 @user_router.get("/profile/", status_code=status.HTTP_200_OK, response_model=UserRead)
