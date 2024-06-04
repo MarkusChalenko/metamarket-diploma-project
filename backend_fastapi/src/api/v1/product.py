@@ -1,7 +1,10 @@
+from typing import List
+
 from fastapi import APIRouter, HTTPException
 
 from db.db import db_dependency
-from services.product import create_product, get_product, update_product, delete_product, get_user_products
+from services.product import create_product, get_product, update_product, delete_product, get_user_products, \
+    get_products_in_category
 from schemas.product import Product, ProductCreate, ProductUpdate, UserProducts
 
 product_router = APIRouter(prefix="/products", tags=["products"])
@@ -42,3 +45,11 @@ async def get_all_user_products(user_id: int, db: db_dependency):
     if user_products is None:
         raise HTTPException(status_code=404, detail="User not found")
     return user_products
+
+
+@product_router.get("/category/{category_id}", response_model=List[Product])
+async def get_products_by_category(db: db_dependency, category_id: int):
+    products: List[Product] = await get_products_in_category(db, category_id)
+    if not products:
+        raise HTTPException(status_code=404, detail="Products not found")
+    return products

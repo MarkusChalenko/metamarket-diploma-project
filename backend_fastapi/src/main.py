@@ -47,7 +47,7 @@ app.include_router(api_router)
 
 
 @app.get("/ping")
-def root(user: user_dependency) -> str:
+def root():
     """root route"""
     return "pong"
 

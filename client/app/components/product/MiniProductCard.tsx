@@ -2,11 +2,23 @@ import React from 'react';
 import styles from './MiniProductCard.module.css';
 import Image from "next/image";
 
+import axios from 'axios';
+
 import comment from "@/assets/images/comment.svg"
 import { MiniProductCardProps } from './miniProductCard.interface';
+import {CreateService} from "@/services/cart/create.service";
 
 export const MiniProductCard: React.FC<MiniProductCardProps> = ({ product }) => {
-  const imageUrl = product.image ? product.image : 'placeholder.jpg'; // Замените 'placeholder.jpg' на путь к вашему заглушечному изображению
+  const imageUrl = product.image ? product.image : 'placeholder.jpg';
+
+  const addToCart = async (productId: number) => {
+    try {
+      await CreateService.addProductToUserCart(productId);
+      alert('Product added to cart');
+    } catch (error) {
+      console.error('Error adding product to cart:', error);
+    }
+  };
 
   return (
     <div className={styles.card}>
@@ -27,7 +39,8 @@ export const MiniProductCard: React.FC<MiniProductCardProps> = ({ product }) => 
           {product.comments} отзывов
         </span>
       </div>
-      <button className={styles.addButton}>В корзину</button>
+      <button onClick={() => {alert('Product added to cart'); localStorage.setItem('hasVisited', 'true');
+ }} className={styles.addButton}>В корзину</button>
     </div>
   );
 };

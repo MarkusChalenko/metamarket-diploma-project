@@ -50,10 +50,10 @@ async def delete_order_endpoint(db: db_dependency, order_id: int = Path(..., tit
         raise HTTPException(status_code=500, detail="Failed to delete order")
 
 
-@order_router.get("/user/{user_id}", response_model=UserOrdersResponse)
+@order_router.get("/user/", response_model=UserOrdersResponse)
 async def get_user_orders_endpoint(db: db_dependency, user: user_dependency):
     try:
         orders = await get_user_orders(db, user.id)
-        return {"user_id": user.id, "orders": orders}
+        return {"orders": orders}
     except Exception as e:
         raise HTTPException(status_code=500, detail="Failed to retrieve user orders")

@@ -138,6 +138,7 @@ async def reg_user(body: UserRegistration, db: AsyncSession) -> UserRead:
 async def login_user(body: UserLogin, db: AsyncSession) -> UserLoginResponse:
     user: User = await get_user_by_email(db,body.email, with_pass=True)
 
+    # check if user exists
     if not user:
         raise error
 

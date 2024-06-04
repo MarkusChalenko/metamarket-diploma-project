@@ -37,7 +37,7 @@ export const MainProvider: FC<IMainProvider> = ({
             <AuthProvider Component={Component}>
               <Layout>
                 {children}
-                <ReactQueryDevtools initialIsOpen={false} />
+                {/*<ReactQueryDevtools initialIsOpen={false} />*/}
               </Layout>
             </AuthProvider>
           </QueryClientProvider>

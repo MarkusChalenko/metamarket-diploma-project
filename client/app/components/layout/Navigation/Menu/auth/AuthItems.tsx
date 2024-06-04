@@ -20,15 +20,15 @@ export const AuthItems: FC = (): JSX.Element => {
       {user ? (
         <>
           <Menu name={profileMenu} />
-          <>{account ? <Menu name={accountMenu} /> : <Wallet />}</>
+          {/*<>{account ? <Menu name={accountMenu} /> : <Wallet />}</>*/}
           <Logout />
         </>
       ) : (
         <>
           <Menu name={loginMenu} />
-          <>
-            {account ? <Menu name={accountMenu} /> : <Menu name={walletMenu} />}
-          </>
+          {/*<>*/}
+          {/*  {account ? <Menu name={accountMenu} /> : <Menu name={walletMenu} />}*/}
+          {/*</>*/}
         </>
       )}
     </>

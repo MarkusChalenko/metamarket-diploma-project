@@ -12,9 +12,6 @@ import { WalletForm } from "./web3/WalletForm";
 
 export const Auth: FC<IAuth> = ({ appearance }): JSX.Element => {
   const { isLoading } = useAuth();
-
-  console.log(isLoading)
-
   const {
     register: registerInput,
     handleSubmit,
@@ -23,8 +20,7 @@ export const Auth: FC<IAuth> = ({ appearance }): JSX.Element => {
   } = useForm<IAuthInput>({
     mode: "onChange",
   });
-
-  const { register, login, loginInWeb3 } = useActions();
+  const { register, login } = useActions();
 
   useAuthRedirect();
 
@@ -32,7 +28,6 @@ export const Auth: FC<IAuth> = ({ appearance }): JSX.Element => {
     const onSubmitData = {
       register: register,
       login: login,
-      web3: loginInWeb3,
     };
 
     onSubmitData[appearance](data);
@@ -60,7 +55,6 @@ export const Auth: FC<IAuth> = ({ appearance }): JSX.Element => {
         authFunction={register}
       />
     ),
-    web3: <WalletForm />,
   };
 
   return data[appearance];

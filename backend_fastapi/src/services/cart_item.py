@@ -7,8 +7,8 @@ from models.cart_item import CartItem
 from schemas.cart_item import CartItemCreate
 
 
-async def add_to_cart(db: db_dependency, cart_item_data: CartItemCreate) -> CartItem:
-    cart_item = CartItem(**cart_item_data.dict())
+async def add_to_cart(db: db_dependency, cart_item_data: CartItemCreate, user_id: int) -> CartItem:
+    cart_item = CartItem(**cart_item_data.dict(), user_id=user_id)
     db.add(cart_item)
     await db.commit()
     return cart_item

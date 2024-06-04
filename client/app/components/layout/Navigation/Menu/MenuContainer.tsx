@@ -11,11 +11,11 @@ export const MenuContainer: FC = (): JSX.Element => {
   const { item } = useItem();
   return (
     <div className={styles.container}>
-      {Object.keys(item).length !== 0 ? (
-        <Menu name={itemMenu} />
-      ) : (
-        <Menu name={createMenu} />
-      )}
+      {/*{Object.keys(item).length !== 0 ? (*/}
+      {/*  <Menu name={itemMenu} />*/}
+      {/*) : (*/}
+      {/*  <Menu name={createMenu} />*/}
+      {/*)}*/}
       <AuthItems />
     </div>
   );

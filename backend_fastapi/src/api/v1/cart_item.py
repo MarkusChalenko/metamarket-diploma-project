@@ -2,15 +2,16 @@ from fastapi import APIRouter, HTTPException
 
 from db.db import db_dependency
 from schemas.cart_item import CartItemResponse, CartItemCreate, UserCartResponse
+from services.auth import user_dependency
 from services.cart_item import add_to_cart, remove_from_cart, update_cart_item_quantity, get_user_cart
 
 cart_item_router = APIRouter(prefix="/cart", tags=["cart"])
 
 
 @cart_item_router.post("/add", response_model=CartItemResponse)
-async def add_to_cart_endpoint(cart_item_data: CartItemCreate, db: db_dependency):
+async def add_to_cart_endpoint(cart_item_data: CartItemCreate, db: db_dependency, user: user_dependency):
     try:
-        cart_item = await add_to_cart(db, cart_item_data)
+        cart_item = await add_to_cart(db, cart_item_data, user.id)
         return cart_item
     except Exception as e:
         raise HTTPException(status_code=500, detail="Failed to add item to cart")

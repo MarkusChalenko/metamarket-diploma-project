@@ -38,5 +38,4 @@ class OrderResponse(BaseModel):
 
 
 class UserOrdersResponse(BaseModel):
-    user_id: int
     orders: List[OrderResponse]

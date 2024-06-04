@@ -1,8 +1,8 @@
 export interface IUser {
   id: string;
-  name: string;
+  full_name: string;
   email: string;
-  role: IRole[];
+  role: IRole;
 }
 
 export interface IRole {

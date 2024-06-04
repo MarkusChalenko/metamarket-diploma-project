@@ -31,5 +31,4 @@ class Order(Base):
     products_details: Mapped[list["OrderProductAssociation"]] = relationship(
         "OrderProductAssociation",
         back_populates="order",
-        lazy = "joined"
     )

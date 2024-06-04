@@ -20,12 +20,12 @@ class User(Base):
     role: Mapped["Role"] = relationship("Role", uselist=False)
     registered_at = mapped_column(TIMESTAMP, default=datetime.utcnow)
 
+    refresh_token = relationship("RefreshToken", uselist=False, back_populates="user")
+
     products: Mapped[List["Product"]] = relationship("Product", back_populates="user")
     reviews: Mapped["ProductReview"] = relationship("ProductReview", back_populates="reviewer")
     cart: Mapped["CartItem"] = relationship("CartItem", back_populates="user")
     orders: Mapped["Order"] = relationship("Order", back_populates="user")
-
-    refresh_token = relationship("RefreshToken", uselist=False, back_populates="user")
 
     def to_user_read(self) -> UserRead:
         return UserRead(

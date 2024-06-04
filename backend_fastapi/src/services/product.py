@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
@@ -50,3 +50,11 @@ async def get_user_products(user_id: int, db: AsyncSession) -> Optional[UserProd
         return None
     products = [product for product in user.products]
     return UserProducts(user_id=user.id, products=products)
+
+
+async def get_products_in_category(db: AsyncSession, category_id: int) -> List[Product]:
+    result = await db.execute(
+        select(Product).where(Product.category_id == category_id)
+    )
+    products: List[Product] = result.scalars().all()
+    return products
